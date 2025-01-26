@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List, Optional
 
 class ReparacionBase(BaseModel):
@@ -12,8 +12,8 @@ class Reparacion(ReparacionBase):
     id: int
     auto_id: int
 
-    class Config:
-        orm_mode = True
+    # Configuración para Pydantic v2
+    model_config = ConfigDict(from_attributes=True)
 
 class AutoBase(BaseModel):
     marca: str
@@ -28,8 +28,8 @@ class Auto(AutoBase):
     cliente_id: int
     reparaciones: List[Reparacion] = []
 
-    class Config:
-        orm_mode = True
+    # Configuración para Pydantic v2
+    model_config = ConfigDict(from_attributes=True)
 
 class ClienteBase(BaseModel):
     nombre: str
@@ -42,5 +42,5 @@ class Cliente(ClienteBase):
     id: int
     autos: List[Auto] = []
 
-    class Config:
-        orm_mode = True
+    # Configuración para Pydantic v2
+    model_config = ConfigDict(from_attributes=True)
